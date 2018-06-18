@@ -8,10 +8,33 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 <body>
-    <canvas id="myCanvas" width="600" height="600"></canvas>
-    <button id="stop">stop</button>
-    <button id="resume">resume</button>
-    <input type="number" id="ms">
+    <canvas id="myCanvas" width="800" height="800"></canvas>
+
+    <div class="calculation-manager">
+        <button id="stop-calculation">Stop calculation</button>
+        <button id="resume-calculation">Resume calculation</button>
+        <input type="number" id="ms-calculation">
+        <input type="range" min="0" max="1000" value="0" id="range-calculation">
+    </div>
+
+    <div class="renderer-manager">
+        <button id="stop-renderer">Stop renderer</button>
+        <button id="resume-renderer">Resume renderer</button>
+        <input type="number" id="ms-renderer">
+        <input type="range" min="0" max="1000" value="0" id="range-renderer">
+    </div>
+
+    <div class="size-manager">
+        <input type="number" id="size">
+        <input type="range" min="1" max="3" value="1" id="range-size">
+    </div>
+    <div class="colors-manager">
+        <div>Color of 0 sand <input type="text" id="color-0"></div>
+        <div>Color of 1 sand <input type="text" id="color-1"></div>
+        <div>Color of 2 sand <input type="text" id="color-2"></div>
+        <div>Color of 3 sand <input type="text" id="color-3"></div>
+        <div>Color of 4 sand <input type="text" id="color-4"></div>
+    </div>
     <script src="./node_modules//gpu.js//bin/gpu.min.js"></script>
     <script src="index.js"></script>
 </body>

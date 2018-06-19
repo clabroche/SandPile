@@ -1,5 +1,5 @@
-const SandPile = require('./sandPile')
-sandPile = SandPile.create(800);
+const sandBox = require('./sandPile')
+sandPile = sandBox.get(800);
 
 let colors = [
     '#fff',
@@ -8,4 +8,4 @@ let colors = [
     '#040f55',
     '#000'
 ];
-module.exports = {sandPile, colors};
+module.exports = { sandPile, sandBox, colors};

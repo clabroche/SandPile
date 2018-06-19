@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-// const controller = require('./src/index.js')
+const controller = require('./src/index.js')
 
 var app = express();
 
@@ -11,13 +11,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/api/cells', function(request, response, next) {
-//   // console.log('cell')
-//   response.status(200).json(controller.sandPile);
-// })
-// app.get('/api/colors', function (request, response, next) {
-//   response.status(200).json(controller.colors);
-// });
+app.get('/cells', function (request, response, next) {
+  // console.log('cell')
+  response.status(200).json(controller.sandBox.get());
+})
+
+app.get('/cellsToRender', function (request, response, next) {
+  response.status(200).json(controller.sandBox.cellsToRender);
+  cellsToRender = {};
+})
+app.get('/colors', function (request, response, next) {
+  response.status(200).json(controller.colors);
+});
+app.post('/start', function (request, response, next) {
+  controller.sandBox.start()
+  response.status(200).json(controller.sandPile);
+});
+app.post('/stop', function (request, response, next) {4
+  controller.sandBox.stop()
+  response.status(200).json(controller.sandPile);
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

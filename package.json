@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
+    "fs-extra": "^6.0.1",
     "gpu.js": "^1.4.3",
     "request-promise": "^4.2.2",
     "serve-favicon": "^2.5.0",

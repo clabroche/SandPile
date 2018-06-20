@@ -27,8 +27,18 @@ app.post('/start', function (request, response, next) {
   controller.sandBox.start()
   response.status(200).json(controller.sandPile);
 });
-app.post('/stop', function (request, response, next) {4
+app.post('/stop', function (request, response, next) {
   controller.sandBox.stop()
+  response.status(200).json(controller.sandPile);
+});
+
+app.post('/save', function (request, response, next) {
+  controller.sandBox.save()
+  response.status(200).json(controller.sandPile);
+});
+
+app.post('/restore', function (request, response, next) {
+  controller.sandBox.restore()
   response.status(200).json(controller.sandPile);
 });
 // catch 404 and forward to error handler

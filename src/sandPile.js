@@ -1,8 +1,8 @@
 const _ = require('lodash');
-
+const fse = require('fs-extra')
 let sandBox = {}
 const size = 800;
-const sandPile = Array(size).fill(0).map((_, y) => {
+let sandPile = Array(size).fill(0).map((_, y) => {
     return Array(size).fill().map((_, x) => {
         return new cell().coord(x, y)
     });
@@ -16,7 +16,6 @@ let colors = [
     '#000'
 ];
 
-let sizeFactor = 1;
 sandBox.cellsToRender = {}
 function cell() {
     this.value = 0;
@@ -44,12 +43,11 @@ function cell() {
     }
 }
 function addSand(nb) {
-    sandPile[size / 2][size / 2].update(nb);
+    if (sandPile[size / 2][size / 2].update)
+        sandPile[size / 2][size / 2].update(nb);
 }
 let msCalculation = 0;
-let msRenderer = 0;
 let intervalCalculation;
-let intervalRenderer;
 
 sandBox.loopCalculation = function () {
     intervalCalculation = setInterval(_ => {
@@ -70,6 +68,25 @@ sandBox.stop = ev => {
     clearInterval(intervalCalculation);
 };
 sandBox.get = ev => {
+    return sandPile;
+};
+sandBox.save = ev => {
+    fse.writeJsonSync('./save.lama', sandPile);
+    return sandPile;
+};
+
+sandBox.restore = ev => {
+    sandBox.stop()
+    cellsToRender = {}
+    sandPile = fse.readJsonSync('./save.lama'); 
+    for (let y = 0; y < sandPile.length; y++) {
+        for (let x = 0; x < sandPile[y].length; x++) {
+            const _cell = sandPile[y][x];
+            sandPile[y][x] = new cell().coord(_cell.x, _cell.y)
+        }
+    }
+    sandBox.start()
+
     return sandPile;
 };
 module.exports = sandBox

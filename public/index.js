@@ -124,13 +124,23 @@ function save() {
     type: 'POST',
     url: 'save',
     success: (data) => {
-      console.log(data)
+      console.log('save')
     }
   })
 }
 
 function restore() {
-  sandPile = JSON.parse(window.localStorage.setItem('sandPile') || []);
-  colors = JSON.parse(window.localStorage.setItem('colors') || []);
-  console.log(colors)
+  this.cellsToRender = {};
+  $.ajax({
+    type: 'POST',
+    url: 'restore',
+    success: (data) => {
+      console.log('restore')
+      cellsToRender = {}
+      setTimeout(_ => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }, 1000);
+    }
+  })
+
 }
